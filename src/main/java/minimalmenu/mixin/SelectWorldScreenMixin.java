@@ -3,7 +3,7 @@ package minimalmenu.mixin;
 import java.io.File;
 import java.util.List;
 
-import net.minecraft.text.TranslatableText;
+import minimalmenu.widget.MinimalMenuButtonWidget;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,26 +14,29 @@ import minimalmenu.config.ConfigHandler;
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 
 @Mixin(SelectWorldScreen.class)
-public abstract class SelectWorldScreenMixin extends ScreenMixin {
+public abstract class SelectWorldScreenMixin extends Screen {
     @Shadow @Final protected Screen parent;
 
-    @Inject(method = "init", at = @At("HEAD"))
+  protected SelectWorldScreenMixin(Text title) {
+    super(title);
+  }
+
+  @Inject(method = "init", at = @At("HEAD"))
     public void init(CallbackInfo info) {
-        List<ClickableWidget> buttons = Screens.getButtons((Screen)(Object)this);
-        
+        List<ClickableWidget> buttons = Screens.getButtons(this);
+
         if (ConfigHandler.ADD_SAVES) {
             buttons.add(
-                new ButtonWidget(
+                new MinimalMenuButtonWidget(
                     this.width / 2 - 232, //Create open saves folder button.
                     this.height - 28,
                     72, 20,
-                    new TranslatableText("minimalmenu.screen.singleplayer.saves"),
+                    Text.translatable("minimalmenu.screen.singleplayer.saves"),
                     (button -> {
                         assert this.client != null;
                         File file = client.runDirectory.toPath().resolve("saves").toFile(); //Create saves file from current running directory.
@@ -42,11 +45,11 @@ public abstract class SelectWorldScreenMixin extends ScreenMixin {
         }
         if (ConfigHandler.ADD_RELOAD_SAVES) {
             buttons.add(
-                new ButtonWidget(
+                new MinimalMenuButtonWidget(
                     this.width / 2 - 232, //Create reload button.
                     this.height - 52,
                     72, 20,
-                        new TranslatableText("minimalmenu.screen.singleplayer.reload"),
+                  Text.translatable("minimalmenu.screen.singleplayer.reload"),
                     button -> {
                         assert this.client != null;
                         this.client.setScreenAndRender(new SelectWorldScreen(parent)); //Refresh screen, by creating a new one.

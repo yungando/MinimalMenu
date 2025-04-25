@@ -32,6 +32,7 @@ public class ConfigHandler {
     public static int Y_OFFSET_TITLE;
 
     public static boolean REMOVE_ONLINE;
+    public static boolean REMOVE_CREDITS;
 
     public static boolean REMOVE_FEEDBACK;
     public static boolean REMOVE_BUGS;
@@ -72,6 +73,7 @@ public class ConfigHandler {
                     .name("Y_OFFSET_TITLE").value(Y_OFFSET_TITLE)
 
                     .name("REMOVE_ONLINE").value(REMOVE_ONLINE)
+                    .name("REMOVE_CREDITS").value(REMOVE_CREDITS)
 
                     .name("REMOVE_FEEDBACK").value(REMOVE_FEEDBACK)
                     .name("REMOVE_BUGS").value(REMOVE_BUGS)
@@ -119,6 +121,7 @@ public class ConfigHandler {
                 Y_OFFSET_TITLE = readInt(object, "Y_OFFSET_TITLE", 0);
 
                 REMOVE_ONLINE = readBoolean(object, "REMOVE_ONLINE", false);
+                REMOVE_CREDITS = readBoolean(object, "REMOVE_CREDITS", false);
 
                 REMOVE_FEEDBACK = readBoolean(object, "REMOVE_FEEDBACK", false);
                 REMOVE_BUGS = readBoolean(object, "REMOVE_BUGS", false);
@@ -159,6 +162,8 @@ public class ConfigHandler {
         Y_OFFSET_TITLE = 0;
 
         REMOVE_ONLINE = false;
+        REMOVE_CREDITS = false;
+
         REMOVE_FEEDBACK = false;
         REMOVE_BUGS = false;
         REMOVE_LANSP = false;
