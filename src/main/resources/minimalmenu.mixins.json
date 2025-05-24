@@ -4,9 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "client": [
-    "RotatingCubeMapRendererMixin",
     "TitleScreenMixin",
-    "SelectWorldScreenMixin",
     "OptionsScreenMixin",
     "ScreenMixin",
     "GameMenuScreenMixin",

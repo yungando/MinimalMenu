@@ -5,7 +5,6 @@ import minimalmenu.config.ConfigHandler;
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
-import minimalmenu.widget.MinimalMenuButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.text.Text;
@@ -20,15 +19,6 @@ import java.util.List;
 public abstract class GameMenuScreenMixin extends Screen {
     protected GameMenuScreenMixin(Text title) {
         super(title);
-    }
-
-    @Inject(method = "initWidgets", at = @At("HEAD"))
-    private void initWidgets(CallbackInfo info) {
-        if (ConfigHandler.ADD_FOLDER_PS) {
-            this.addDrawableChild(new MinimalMenuButtonWidget(this.width / 2 + 104, this.height / 4 + 120 + -32, 20, 20, Text.translatable("minimalmenu.common..minecraft"), (button) -> {
-                MinimalMenu.processButtonFolderClick(client);
-            }));
-        }
     }
     
     @Inject(method = "init", at = @At("TAIL"))
@@ -67,9 +57,6 @@ public abstract class GameMenuScreenMixin extends Screen {
                         }
                     }
                 }
-
-                button.setX(button.getX() - ConfigHandler.X_OFFSET_PAUSE);
-                button.setY(button.getY() - ConfigHandler.Y_OFFSET_PAUSE);
                 button.setY(button.getY() - yOffset);
             }
         }

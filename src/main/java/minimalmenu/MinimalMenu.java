@@ -1,15 +1,10 @@
 package minimalmenu;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import minimalmenu.screens.FolderScreen;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.navigation.GuiNavigationPath;
-import net.minecraft.client.gui.widget.ButtonWidget;
+
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.text.TextContent;
-import net.minecraft.util.Util;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,7 +20,6 @@ import net.minecraft.util.Language;
 public class MinimalMenu implements ClientModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
 
-    public static final String MOD_ID = "minimalmenu";
     public static final String MOD_NAME = "MinimalMenu";
 
     @Override
@@ -77,7 +71,7 @@ public class MinimalMenu implements ClientModInitializer {
     }
 
     public static boolean buttonMatchesKey(Widget widget, String... translationKeys) {
-        if (widget instanceof ButtonWidget button) {
+        if (widget instanceof ClickableWidget button) {
             Text text = button.getMessage();
             TextContent textContent = text.getContent();
 
@@ -85,16 +79,5 @@ public class MinimalMenu implements ClientModInitializer {
               .anyMatch(s -> ((TranslatableTextContent) textContent).getKey().equals(s));
         }
         return false;
-    }
-
-    public static void processButtonFolderClick(MinecraftClient client) {
-        if (ConfigHandler.OPEN_FOLDER_SCREEN) {
-            FolderScreen folderScreen = new FolderScreen(client.currentScreen);
-            client.setScreenAndRender(folderScreen);
-        } else {
-            assert client != null;
-            File file = client.runDirectory.toPath().toFile();
-            Util.getOperatingSystem().open(file);
-        }
     }
 }

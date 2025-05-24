@@ -18,19 +18,10 @@ public class ConfigScreen {
         //Create categories
         ConfigCategory titleScreen = builder.getOrCreateCategory(Text.translatable("minimalmenu.config.category.title"));
         ConfigCategory pauseScreen = builder.getOrCreateCategory(Text.translatable("minimalmenu.config.category.pause"));
-        ConfigCategory singePlayerScreen = builder.getOrCreateCategory(Text.translatable("minimalmenu.config.category.sp"));
-        ConfigCategory generalScreen = builder.getOrCreateCategory(Text.translatable("minimalmenu.config.category.general"));
         ConfigCategory optionsScreen = builder.getOrCreateCategory(Text.translatable("minimalmenu.config.category.options"));
         ConfigCategory otherOptions = builder.getOrCreateCategory(Text.translatable("minimalmenu.config.category.other"));
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-
-        //Build general screen options
-        generalScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.general.openFolderScreen"), ConfigHandler.OPEN_FOLDER_SCREEN)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.OPEN_FOLDER_SCREEN = newValue)
-                .setTooltip(Text.translatable("minimalmenu.config.option.general.openFolderScreen.tooltip"))
-                .build());
 
         //Build title screen options
         titleScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.title.splash"), ConfigHandler.REMOVE_SPLASH)
@@ -73,31 +64,6 @@ public class ConfigScreen {
                 .setSaveConsumer(newValue -> ConfigHandler.REMOVE_COPYRIGHT = newValue)
                 .build());
 
-        titleScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.common.addFolder"), ConfigHandler.ADD_FOLDER_TS)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.ADD_FOLDER_TS = newValue)
-                .build());
-
-        titleScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.title.spin"), ConfigHandler.STOP_SPIN)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.STOP_SPIN = newValue)
-                .build());
-
-        titleScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.title.dirtBackground"), ConfigHandler.DIRT_BACKGROUND)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.DIRT_BACKGROUND = newValue)
-                .build());
-
-        titleScreen.addEntry(entryBuilder.startIntField(Text.translatable("minimalmenu.config.option.title.xOffset"), ConfigHandler.X_OFFSET_TITLE)
-                .setDefaultValue(0)
-                .setSaveConsumer(newValue -> ConfigHandler.X_OFFSET_TITLE = newValue)
-                .build());
-
-        titleScreen.addEntry(entryBuilder.startIntField(Text.translatable("minimalmenu.config.option.title.yOffset"), ConfigHandler.Y_OFFSET_TITLE)
-                .setDefaultValue(0)
-                .setSaveConsumer(newValue -> ConfigHandler.Y_OFFSET_TITLE = newValue)
-                .build());
-
         //Build options screen options
         optionsScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.options.online"), ConfigHandler.REMOVE_ONLINE)
                 .setDefaultValue(false)
@@ -109,6 +75,11 @@ public class ConfigScreen {
           .setSaveConsumer(newValue -> ConfigHandler.REMOVE_CREDITS = newValue)
           .build());
 
+        optionsScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.options.telemetry"), ConfigHandler.REMOVE_TELEMETRY)
+          .setDefaultValue(false)
+          .setSaveConsumer(newValue -> ConfigHandler.REMOVE_TELEMETRY = newValue)
+          .build());
+
         //Build pause screen options
         pauseScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.pause.feedback"), ConfigHandler.REMOVE_FEEDBACK)
                 .setDefaultValue(false)
@@ -118,42 +89,6 @@ public class ConfigScreen {
         pauseScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.pause.bugs"), ConfigHandler.REMOVE_BUGS)
                 .setDefaultValue(false)
                 .setSaveConsumer(newValue -> ConfigHandler.REMOVE_BUGS = newValue)
-                .build());
-
-        pauseScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.pause.lanSingle"), ConfigHandler.REMOVE_LANSP)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.REMOVE_LANSP = newValue)
-                .build());
-
-        pauseScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.pause.lanMulti"), ConfigHandler.REMOVE_LANMP)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.REMOVE_LANMP = newValue)
-                .build());
-
-        pauseScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.common.addFolder"), ConfigHandler.ADD_FOLDER_PS)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.ADD_FOLDER_PS = newValue)
-                .build());
-
-        pauseScreen.addEntry(entryBuilder.startIntField(Text.translatable("minimalmenu.config.option.pause.xOffset"), ConfigHandler.X_OFFSET_PAUSE)
-                .setDefaultValue(0)
-                .setSaveConsumer(newValue -> ConfigHandler.X_OFFSET_PAUSE = newValue)
-                .build());
-
-        pauseScreen.addEntry(entryBuilder.startIntField(Text.translatable("minimalmenu.config.option.pause.yOffset"), ConfigHandler.Y_OFFSET_PAUSE)
-                .setDefaultValue(0)
-                .setSaveConsumer(newValue -> ConfigHandler.Y_OFFSET_PAUSE = newValue)
-                .build());
-
-        //Build singleplayer screen options
-        singePlayerScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.sp.addSavesFolder"), ConfigHandler.ADD_SAVES)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.ADD_SAVES = newValue)
-                .build());
-
-        singePlayerScreen.addEntry(entryBuilder.startBooleanToggle(Text.translatable("minimalmenu.config.option.sp.reloadSaves"), ConfigHandler.ADD_RELOAD_SAVES)
-                .setDefaultValue(false)
-                .setSaveConsumer(newValue -> ConfigHandler.ADD_RELOAD_SAVES = newValue)
                 .build());
 
         //Build other options

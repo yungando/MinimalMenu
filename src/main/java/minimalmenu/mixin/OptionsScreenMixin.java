@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 
 import java.util.List;
@@ -26,19 +25,15 @@ public class OptionsScreenMixin extends Screen {
     final List<ClickableWidget> buttons = Screens.getButtons(this);
 
     for (ClickableWidget widget : buttons) {
-      if (widget instanceof ButtonWidget button) {
-        if (ConfigHandler.REMOVE_ONLINE) {
-          if (MinimalMenu.buttonMatchesKey(button, "options.online")) {
-            button.visible = false;
-          }
-          if (MinimalMenu.buttonMatchesKey(button, "options.fov")) {
-            button.setWidth(310);
-          }
+      if (widget instanceof ClickableWidget button) {
+        if (ConfigHandler.REMOVE_ONLINE && MinimalMenu.buttonMatchesKey(button, "options.online")) {
+          button.visible = false;
         }
-        if (ConfigHandler.REMOVE_CREDITS) {
-          if (MinimalMenu.buttonMatchesKey(button, "options.credits_and_attribution")) {
-            button.visible = false;
-          }
+        if (ConfigHandler.REMOVE_CREDITS && MinimalMenu.buttonMatchesKey(button, "options.credits_and_attribution")) {
+          button.visible = false;
+        }
+        if (ConfigHandler.REMOVE_TELEMETRY && MinimalMenu.buttonMatchesKey(button, "options.telemetry")) {
+          button.visible = false;
         }
       }
     }
