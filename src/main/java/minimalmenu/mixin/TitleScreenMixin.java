@@ -42,6 +42,9 @@ public abstract class TitleScreenMixin extends Screen {
         final List<ClickableWidget> buttons = Screens.getButtons(this);
         Collections.reverse(buttons);
 
+        int spacing = 24;
+        int yOffset = 0;
+
         for (ClickableWidget widget : buttons) {
             if (widget instanceof ButtonWidget button) {
                 if (ConfigHandler.REMOVE_SINGLEPLAYER && MinimalMenu.buttonMatchesKey(button, "menu.singleplayer")) {
@@ -49,9 +52,11 @@ public abstract class TitleScreenMixin extends Screen {
                 }
                 if (ConfigHandler.REMOVE_MULTIPLAYER && MinimalMenu.buttonMatchesKey(button, "menu.multiplayer")) {
                     button.visible = false;
+                    yOffset -= spacing;
                 }
                 if (ConfigHandler.REMOVE_REALMS && MinimalMenu.buttonMatchesKey(button, "menu.online")) {
                     button.visible = false;
+                    yOffset -= spacing;
                 }
                 if (ConfigHandler.REMOVE_LANGUAGE && MinimalMenu.buttonMatchesKey(button, "options.language")) {
                     button.visible = false;
@@ -59,6 +64,8 @@ public abstract class TitleScreenMixin extends Screen {
                 if (ConfigHandler.REMOVE_ACCESSIBILITY && MinimalMenu.buttonMatchesKey(button, "options.accessibility")) {
                     button.visible = false;
                 }
+
+                button.setY(button.getY() - yOffset);
             }
         }
     }
